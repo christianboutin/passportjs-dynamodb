@@ -3,8 +3,6 @@
 // load all the things we need
 var LocalStrategy   = require('passport-local').Strategy;
 
-// load up the user model
-//var User       		= require('../app/models/user');
 var bcrypt   = require('bcrypt-nodejs');
 
 var aws = require('aws-sdk')
@@ -74,10 +72,6 @@ module.exports = function(passport) {
       if (data.Items.length > 0) {
         return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
       } else {
-        // var id = new Uint32();
-        // id = random.
-
-        //console.log("bcrypt"+bcrypt.hashSync())
 
         var params = {
           "TableName":tableName,
@@ -90,21 +84,10 @@ module.exports = function(passport) {
         dd.putItem(params, function(err,data){
           if (err){
             return done(null, false, req.flash('signupMessage', "Apologies, please try again now. ("+err+")"));
-
-            //console.log(err);
           }
           return done(null, params.Item);
         })
 
-        // if there is no user with that email
-        // create the user
-
-        // // save the user
-        // newUser.save(function(err) {
-        //   if (err)
-        //   throw err;
-        //   return done(null, newUser);
-        // });
       }
 
     });
