@@ -30,7 +30,7 @@ module.exports = function(passport) {
       if (err){
         done(err,data);
       }
-      done(err,data.Item)
+      done(err,{"id": data.Item.id.N, "email": data.Item.email.S, "pw": data.Item.pw.S});
     })
   });
 
