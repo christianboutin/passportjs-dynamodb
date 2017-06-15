@@ -1,0 +1,41 @@
+{
+"AttributeDefinitions": [
+            {
+                "AttributeName": "email", 
+                "AttributeType": "S"
+            }, 
+            {
+                "AttributeName": "id", 
+                "AttributeType": "N"
+            }
+        ], 
+        "GlobalSecondaryIndexes": [
+            {
+                "IndexName": "email-index", 
+                "Projection": {
+                    "ProjectionType": "KEYS_ONLY"
+                }, 
+                "ProvisionedThroughput": {
+                    "WriteCapacityUnits": 5, 
+                    "ReadCapacityUnits": 5
+                }, 
+                "KeySchema": [
+                    {
+                        "KeyType": "HASH", 
+                        "AttributeName": "email"
+                    }
+                ] 
+            }
+        ], 
+        "ProvisionedThroughput": {
+            "WriteCapacityUnits": 5, 
+            "ReadCapacityUnits": 5
+        }, 
+        "TableName": "user", 
+        "KeySchema": [
+            {
+                "KeyType": "HASH", 
+                "AttributeName": "id"
+            } 
+        ] 
+}
